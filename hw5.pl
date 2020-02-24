@@ -58,14 +58,26 @@ Write a predicate insert(X,Y,Z) that succeeds if Z is the tree Y with X inserted
 
 /* Problem 1 Answer: */
 
+insert(leaf,Y,Y).
+insert(node(V, Xl, Xr), Y, node(V, Zl, Zr)):-
+	insert(Xl, Y, Zl).
+insert(node(V, Xl, Xr), Y, node(V, Zl, Zr)):-
+	insert(Xr, Y, Zl).
+insert(node(V, Xl, Xr), Y, node(V, Zl, Zr)):-
+	insert(Xl, Y, Zr).
+insert(node(V, Xl, Xr), Y, node(V, Zl, Zr)):-
+	insert(Xr, Y, Zr).
+insert(node(Xv, Xl, Xr), node(Yv, Yl, Yr), node(Zv, Zl, Zr)):-
+	
+
 /* Problem 1 Test: */
 
-% :- insert(3,node(5,leaf,leaf),X), X = node(5,node(3,leaf,leaf),leaf).
-% :- insert(7,node(5,leaf,leaf),X), X = node(5,leaf,node(7,leaf,leaf)).
-% :- insert(1,node(5,node(3,leaf,leaf),node(7,leaf,leaf)),X), X = node(5,node(3,node(1,leaf,leaf),leaf),node(7,leaf,leaf)).
-% :- insert(1,node(5,node(3,node(2,leaf,leaf),leaf),node(7,leaf,leaf)),X), X = node(5,node(3,node(2,node(1,leaf,leaf),leaf),leaf),node(7,leaf,leaf)).
+:- insert(3,node(5,leaf,leaf),X), X = node(5,node(3,leaf,leaf),leaf).
+:- insert(7,node(5,leaf,leaf),X), X = node(5,leaf,node(7,leaf,leaf)).
+:- insert(1,node(5,node(3,leaf,leaf),node(7,leaf,leaf)),X), X = node(5,node(3,node(1,leaf,leaf),leaf),node(7,leaf,leaf)).
+:- insert(1,node(5,node(3,node(2,leaf,leaf),leaf),node(7,leaf,leaf)),X), X = node(5,node(3,node(2,node(1,leaf,leaf),leaf),leaf),node(7,leaf,leaf)).
 
-% :- (insert(3,node(5,node(3,node(2,leaf,leaf),leaf),node(7,leaf,leaf)),X), X = node(5,node(3,node(2,node(3,leaf,leaf),leaf)),node(7,leaf,leaf))) -> fail ; true.
+:- (insert(3,node(5,node(3,node(2,leaf,leaf),leaf),node(7,leaf,leaf)),X), X = node(5,node(3,node(2,node(3,leaf,leaf),leaf)),node(7,leaf,leaf))) -> fail ; true.
 
 
 /* Problem 2:

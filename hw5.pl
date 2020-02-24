@@ -85,18 +85,22 @@ to_list(node(5,node(3,node(1,leaf,leaf),node(4,leaf,leaf)),node(7,leaf,leaf)),X)
 
 /* Problem 2 Answer:  */
 
+append([],Y,Y).
+append([H|Xt], Y, [H|Zt]):-
+	append(Xt, Y, Zt).
+
 to_list(leaf, []).
-to_list(node(Xv, Xl, Xr),[Yh|Yt]):-
-	left
-	center
-	right
+to_list(node(Xv, Xl, Xr),Y]):-
+	to_list(Xl, Yl),
+	to_list(Xr, Yr),
+	append(Yl, [Xv|Yr], Y).
 
 /* Problem 2 Tests:  */
-%:- to_list(node(3,leaf,leaf),L), L = [3].
-%:- to_list(node(5,node(3,leaf,leaf),leaf),L), L = [3,5].
-%:- to_list(node(5,node(3,node(1,leaf,leaf),node(4,leaf,leaf)),node(7,leaf,leaf)),L), L = [1,3,4,5,7].
+:- to_list(node(3,leaf,leaf),L), L = [3].
+:- to_list(node(5,node(3,leaf,leaf),leaf),L), L = [3,5].
+:- to_list(node(5,node(3,node(1,leaf,leaf),node(4,leaf,leaf)),node(7,leaf,leaf)),L), L = [1,3,4,5,7].
 
-%:- (to_list(node(3,leaf,leaf),L), L = [5]) -> fail ; true.
+:- (to_list(node(3,leaf,leaf),L), L = [5]) -> fail ; true.
 
 
 /* Problem 3:

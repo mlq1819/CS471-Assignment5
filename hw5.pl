@@ -59,15 +59,15 @@ Write a predicate insert(X,Y,Z) that succeeds if Z is the tree Y with X inserted
 /* Problem 1 Answer: */
 
 insert(leaf,Y,Y).
-insert(node(V, Xl, Xr), Y, node(V, Zl, Zr)):-
+insert(node(V, Xl, leaf), Y, node(V, Zl, _)):-
 	insert(Xl, Y, Zl).
-insert(node(V, Xl, Xr), Y, node(V, Zl, Zr)):-
+insert(node(V, leaf, Xr), Y, node(V, Zl, _)):-
 	insert(Xr, Y, Zl).
-insert(node(V, Xl, Xr), Y, node(V, Zl, Zr)):-
+insert(node(V, Xl, leaf), Y, node(V, _, Zr)):-
 	insert(Xl, Y, Zr).
-insert(node(V, Xl, Xr), Y, node(V, Zl, Zr)):-
+insert(node(V, leaf, Xr), Y, node(V, _, Zr)):-
 	insert(Xr, Y, Zr).
-insert(node(Xv, Xl, Xr), node(Yv, Yl, Yr), node(Zv, Zl, Zr)):-
+% insert(node(Xv, Xl, Xr), node(Yv, Yl, Yr), node(Zv, Zl, Zr)):-
 	
 
 /* Problem 1 Test: */

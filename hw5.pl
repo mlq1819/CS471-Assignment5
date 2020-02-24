@@ -67,6 +67,14 @@ insert(node(V, Xl, leaf), Y, node(V, _, Zr)):-
 	insert(Xl, Y, Zr).
 insert(node(V, leaf, Xr), Y, node(V, _, Zr)):-
 	insert(Xr, Y, Zr).
+insert(X, node(V, Yl, _), node(V, Zl, _)):-
+	insert(X, Yl, Zl).
+insert(X, node(V, _, Yr), node(V, Zl, _)):-
+	insert(X, Yr, Zl).
+insert(X, node(V, Yl, _), node(V, _, Zr)):-
+	insert(X, Yl, Zr).
+insert(X, node(V, _, Yr), node(V, _, Zr)):-
+	insert(X, Yr, Zr).
 % insert(node(Xv, Xl, Xr), node(Yv, Yl, Yr), node(Zv, Zl, Zr)):-
 	
 

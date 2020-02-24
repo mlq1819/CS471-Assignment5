@@ -85,6 +85,12 @@ to_list(node(5,node(3,node(1,leaf,leaf),node(4,leaf,leaf)),node(7,leaf,leaf)),X)
 
 /* Problem 2 Answer:  */
 
+to_list(leaf, []).
+to_list(node(Xv, Xl, Xr),[Yh|Yt]):-
+	left
+	center
+	right
+
 /* Problem 2 Tests:  */
 %:- to_list(node(3,leaf,leaf),L), L = [3].
 %:- to_list(node(5,node(3,leaf,leaf),leaf),L), L = [3,5].

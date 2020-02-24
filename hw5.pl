@@ -58,25 +58,14 @@ Write a predicate insert(X,Y,Z) that succeeds if Z is the tree Y with X inserted
 
 /* Problem 1 Answer: */
 
-insert(leaf,Y,Y).
-insert(node(V, Xl, leaf), Y, node(V, Zl, _)):-
-	insert(Xl, Y, Zl).
-insert(node(V, leaf, Xr), Y, node(V, Zl, _)):-
-	insert(Xr, Y, Zl).
-insert(node(V, Xl, leaf), Y, node(V, _, Zr)):-
-	insert(Xl, Y, Zr).
-insert(node(V, leaf, Xr), Y, node(V, _, Zr)):-
-	insert(Xr, Y, Zr).
-insert(X, node(V, Yl, _), node(V, Zl, _)):-
+insert(X,leaf,node(X, leaf, leaf)).
+insert(X, node(V, Yl, R), node(V, Zl, R)):-
+	X=<V,
 	insert(X, Yl, Zl).
-insert(X, node(V, _, Yr), node(V, Zl, _)):-
-	insert(X, Yr, Zl).
-insert(X, node(V, Yl, _), node(V, _, Zr)):-
-	insert(X, Yl, Zr).
-insert(X, node(V, _, Yr), node(V, _, Zr)):-
+insert(X, node(V, L, Yr), node(V, L, Zr)):-
+	X>V,
 	insert(X, Yr, Zr).
-% insert(node(Xv, Xl, Xr), node(Yv, Yl, Yr), node(Zv, Zl, Zr)):-
-	
+% completely misinterpreted this at first to think that Z was the BST Y with the BST X inserted into it, got really confused
 
 /* Problem 1 Test: */
 

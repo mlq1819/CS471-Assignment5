@@ -168,9 +168,15 @@ d( U - V, x, RU - RV ):-d(U,x,RU), d(V,x,RV).
 d(U * V,x, U * DV + V * DU):- d(U,x,DU), d(V,x,DV).
 d(U ^ N, x, N*U ^ N1*DU) :- integer(N), N1 is N-1, d(U, x, DU).
 
-evaluate(A,B,[]):-
-	B is A.
-
+evaluate(A,A,B,[]):-
+	B is A,
+	number(B).
+evaluate(A,S,L):-evaluate(A,A,S,L).
+evaluate(A+B,F,S,[X:N|T]):-
+	atom(X),
+	number(N),
+	evaluate(B,F,S,[X:N|T]).
+evaluate(A,F,S,[X:N|T]):-evaluate(F,F,S,T).
 
 /* Problem 4 Tests:  */
 % :- evaluate(x*y, 6, [x:2, y:3]).

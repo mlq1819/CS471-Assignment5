@@ -120,7 +120,7 @@ For example, the following shows a right rotation at the root.
 
 right_rotate(leaf, leaf).
 right_rotate(node(V, leaf, R), node(V, leaf, R)).
-right_rotate(node(Xv, node(Yv, Yl, Xlr), Xr, node(Yv, Yl, node(Xv, Xlr, Xr))).
+right_rotate(node(Xv, node(Yv, Yl, Xlr), Xr), node(Yv, Yl, node(Xv, Xlr, Xr))).
 	
 
 /* Problem 3 Test: */

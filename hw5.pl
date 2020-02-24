@@ -90,7 +90,7 @@ append([H|Xt], Y, [H|Zt]):-
 	append(Xt, Y, Zt).
 
 to_list(leaf, []).
-to_list(node(Xv, Xl, Xr),Y]):-
+to_list(node(Xv, Xl, Xr),Y):-
 	to_list(Xl, Yl),
 	to_list(Xr, Yr),
 	append(Yl, [Xv|Yr], Y).

@@ -118,12 +118,17 @@ For example, the following shows a right rotation at the root.
 
 /* Problem 3 Answer: */
 
-/* Problem 3 Test: */
-%:- right_rotate(node(5,node(3,node(2,leaf,leaf),node(4,leaf,leaf)),node(7,leaf,leaf)),X), X = node(3, node(2, leaf, leaf), node(5, node(4, leaf, leaf), node(7, leaf, leaf))). %SUCCEED
-%:- right_rotate(node(5,node(3,leaf,node(4,leaf,leaf)),node(7,leaf,leaf)),X), X = node(3, leaf, node(5, node(4, leaf, leaf), node(7, leaf, leaf))). %SUCCEED
-%:- right_rotate(node(3,node(2,node(1,leaf,leaf),leaf),leaf),X), right_rotate(X,Y), Y = node(1,leaf,node(2,leaf,node(3,leaf,leaf))). %SUCCEED
+right_rotate(leaf, leaf).
+right_rotate(node(V, leaf, R), node(V, leaf, R)).
+right_rotate(node(Xv, node(Yv, Yl, Xlr), Xr, node(Yv, Yl, node(Xv, Xlr, Xr))).
+	
 
-%:- right_rotate(node(5,leaf,node(7,leaf,leaf)),_) -> fail ; true. %FAIL
+/* Problem 3 Test: */
+:- right_rotate(node(5,node(3,node(2,leaf,leaf),node(4,leaf,leaf)),node(7,leaf,leaf)),X), X = node(3, node(2, leaf, leaf), node(5, node(4, leaf, leaf), node(7, leaf, leaf))). %SUCCEED
+:- right_rotate(node(5,node(3,leaf,node(4,leaf,leaf)),node(7,leaf,leaf)),X), X = node(3, leaf, node(5, node(4, leaf, leaf), node(7, leaf, leaf))). %SUCCEED
+:- right_rotate(node(3,node(2,node(1,leaf,leaf),leaf),leaf),X), right_rotate(X,Y), Y = node(1,leaf,node(2,leaf,node(3,leaf,leaf))). %SUCCEED
+
+:- right_rotate(node(5,leaf,node(7,leaf,leaf)),_) -> fail ; true. %FAIL
 
 
 /* Problem 4:

@@ -169,11 +169,13 @@ d(U * V,x, U * DV + V * DU):- d(U,x,DU), d(V,x,DV).
 d(U ^ N, x, N*U ^ N1*DU) :- integer(N), N1 is N-1, d(U, x, DU).
 
 evaluate(Xs,Ns,[Xt:Nt|_]):-
-	atom(Xt),
-	number(Nt),
+	string(Xs),
 	term_string(Xt,Xs),
-	term_string(Nt,Ns).
+	term_string(Nt,Ns),
+	atom(Xt),
+	number(Nt).
 evaluate(As, S, [X:N|T]):-
+	string(As),
 	atom(X),
 	number(N),
 	term_string(At,As),
@@ -189,12 +191,13 @@ evaluate(E,S,[X:N|T]):-
 	string_concat(As, Bs, Ss),
 	S is Ss.
 evaluate(Et, S, [X:N|T]):-
+	acyclic_term(Et),
 	atom(X),
 	number(N),
-	acyclic_term(Et),
 	term_string(Et, Es),
 	evaluate(Es, S, [X:N|T]).
 evaluate(Es,Ss,_):-
+	string(Es),
 	term_string(Et, Es),
 	St is Et,
 	number(St),

@@ -168,25 +168,37 @@ d( U - V, x, RU - RV ):-d(U,x,RU), d(V,x,RV).
 d(U * V,x, U * DV + V * DU):- d(U,x,DU), d(V,x,DV).
 d(U ^ N, x, N*U ^ N1*DU) :- integer(N), N1 is N-1, d(U, x, DU).
 
-evaluate(X,N,[X:N|_]):-
-	atom(X),
-	number(N).
-evaluate(A, S, [X:N|T]):-
-	atom(A),
+evaluate(Xs,Ns,[Xt:Nt|_]):-
+	atom(Xt),
+	number(Nt),
+	term_string(Xt,Xs),
+	term_string(Nt,Ns).
+evaluate(As, S, [X:N|T]):-
 	atom(X),
 	number(N),
-	evaluate(A, S, T).
+	term_string(At,As),
+	atom(At),
+	evaluate(As, S, T).
 evaluate(E,S,[X:N|T]):-
+	string(E),
 	atom(X),
 	number(N),
-	atom_concat(A,B,E),
+	sring_concat(A,B,E),
 	evaluate(A, As, [X:N|T]),
 	evaluate(B, Bs, [X:N|T]),
-	atom_concat(As, Bs, Ss),
+	string_concat(As, Bs, Ss),
 	S is Ss.
-evaluate(E,S,_):-
-	S is E,
-	number(S).
+evaluate(Et, S, [X:N|T]):-
+	atom(X),
+	number(N),
+	acyclic_term(Et),
+	term_string(Et, Es),
+	evaluate(Es, S, [X:N|T]).
+evaluate(Es,Ss,_):-
+	term_string(Et, Es),
+	St is Et,
+	number(St),
+	term_string(St, Ss).
 
 /* Problem 4 Tests:  */
 :- evaluate(x*y, 6, [x:2, y:3]).

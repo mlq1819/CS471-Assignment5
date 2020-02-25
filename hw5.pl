@@ -174,10 +174,12 @@ evaluate(A X B, An N Bn,[X:N|T]):-
 	evaluate(A, An, [X:N|T]),
 	evaluate(B, Bn, [X:N|T]).
 evaluate(A, S, [X:N|T]):-
+	atom(X),
+	number(N),
 	evaluate(A, S, T).
-evaluate(A,B,[]):-
-	B is A,
-	number(B).
+evaluate(E,S,[]):-
+	S is E,
+	number(S).
 
 /* Problem 4 Tests:  */
 :- evaluate(x*y, 6, [x:2, y:3]).

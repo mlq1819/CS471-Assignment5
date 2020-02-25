@@ -159,14 +159,14 @@ right_rotate(node(Xv, node(Yv, Yl, Xlr), Xr), node(Yv, Yl, node(Xv, Xlr, Xr))).
 
 /* Problem 4 Answer:  */
 
-d(x,x,1).
-d(C,x,0):-number(C).
-d(C*x,x,C):-number(C).
-d(-U, X, -DU) :- d(U, X, DU).
-d( U + V, x, RU + RV ):-d(U,x,RU), d(V,x,RV).
-d( U - V, x, RU - RV ):-d(U,x,RU), d(V,x,RV).
-d(U * V,x, U * DV + V * DU):- d(U,x,DU), d(V,x,DV).
-d(U ^ N, x, N*U ^ N1*DU) :- integer(N), N1 is N-1, d(U, x, DU).
+d(X,X,1):-atom(X).
+d(C,X,0):-atom(X), number(C).
+d(C*X,X,C):-atom(X), number(C).
+d(-U, X, -DU) :- atom(X), d(U, X, DU).
+d( U + V, X, RU + RV ):-atom(X), d(U,X,RU), d(V,X,RV).
+d( U - V, X, RU - RV ):-atom(X), d(U,X,RU), d(V,X,RV).
+d(U * V, X, U * DV + V * DU):- atom(X), d(U,X,DU), d(V,X,DV).
+d(U ^ N, X, N*U ^ N1*DU) :- atom(X), integer(N), N1 is N-1, d(U, X, DU).
 
 evaluate(X,N,[X:N|_]):-
 	atom(X),

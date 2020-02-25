@@ -185,7 +185,7 @@ evaluate(E,S,[X:N|T]):-
 	string(E),
 	atom(X),
 	number(N),
-	sring_concat(A,B,E),
+	string_concat(A,B,E),
 	evaluate(A, As, [X:N|T]),
 	evaluate(B, Bs, [X:N|T]),
 	string_concat(As, Bs, Ss),

@@ -176,34 +176,30 @@ evaluate(A, S, [X:N|T]):-
 	atom(X),
 	number(N),
 	evaluate(A, S, T).
-evaluate((A),S,[X:N|T]):-
-	atom(X),
-	number(N),
-	evaluate(A,S,[X:N|T]).
 evaluate(A^B,S,[X:N|T]):-
 	atom(X),
 	number(N),
-	evaluate(A, As, [X:N|T]),
-	evaluate(B, Bs, [X:N|T]),
-	S is As^Bs.
+	evaluate(A, Sa, [X:N|T]),
+	evaluate(B, Sb, [X:N|T]),
+	S is Sa^Sb.
 evaluate(A*B,S,[X:N|T]):-
 	atom(X),
 	number(N),
-	evaluate(A, As, [X:N|T]),
-	evaluate(B, Bs, [X:N|T]),
-	S is As*Bs.
+	evaluate(A, Sa, [X:N|T]),
+	evaluate(B, Sb, [X:N|T]),
+	S is Sa*Sb.
 evaluate(A+B,S,[X:N|T]):-
 	atom(X),
 	number(N),
-	evaluate(A, As, [X:N|T]),
-	evaluate(B, Bs, [X:N|T]),
-	S is As+Bs.
+	evaluate(A, Sa, [X:N|T]),
+	evaluate(B, Sb, [X:N|T]),
+	S is Sa+Sb.
 evaluate(A-B,S,[X:N|T]):-
 	atom(X),
 	number(N),
-	evaluate(A, As, [X:N|T]),
-	evaluate(B, Bs, [X:N|T]),
-	S is As-Bs.
+	evaluate(A, Sa, [X:N|T]),
+	evaluate(B, Sb, [X:N|T]),
+	S is Sa-Sb.
 evaluate(E,S,_):-
 	S is E,
 	number(S).

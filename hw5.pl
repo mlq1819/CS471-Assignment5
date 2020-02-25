@@ -176,14 +176,34 @@ evaluate(A, S, [X:N|T]):-
 	atom(X),
 	number(N),
 	evaluate(A, S, T).
-evaluate(E,S,[X:N|T]):-
+evaluate((A),S,[X:N|T]):-
 	atom(X),
 	number(N),
-	atom_concat(A,B,E),
+	evaluate(A,S,[X:|T]).
+evaluate(A^B,S,[X:N|T]):-
+	atom(X),
+	number(N),
 	evaluate(A, As, [X:N|T]),
 	evaluate(B, Bs, [X:N|T]),
-	atom_concat(As, Bs, Ss),
-	S is Ss.
+	S is As^Bs.
+evaluate(A*B,S,[X:N|T]):-
+	atom(X),
+	number(N),
+	evaluate(A, As, [X:N|T]),
+	evaluate(B, Bs, [X:N|T]),
+	S is As*Bs.
+evaluate(A+B,S,[X:N|T]):-
+	atom(X),
+	number(N),
+	evaluate(A, As, [X:N|T]),
+	evaluate(B, Bs, [X:N|T]),
+	S is As+Bs.
+evaluate(A-B,S,[X:N|T]):-
+	atom(X),
+	number(N),
+	evaluate(A, As, [X:N|T]),
+	evaluate(B, Bs, [X:N|T]),
+	S is As-Bs.
 evaluate(E,S,_):-
 	S is E,
 	number(S).

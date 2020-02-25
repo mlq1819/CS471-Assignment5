@@ -168,20 +168,23 @@ d( U - V, x, RU - RV ):-d(U,x,RU), d(V,x,RV).
 d(U * V,x, U * DV + V * DU):- d(U,x,DU), d(V,x,DV).
 d(U ^ N, x, N*U ^ N1*DU) :- integer(N), N1 is N-1, d(U, x, DU).
 
-evaluate(E,S,[X:N|T]):-
+evaluate(X,N,[X:N|_]):-
 	atom(X),
-	number(N),
-	atom_concat(A,X,Ea),
-	atom_concat(Ea, B, E),
-	evaluate(A, An, [X:N|T]),
-	evaluate(B, Bn, [X:N|T]),
-	atom_concat(An, N, Sa),
-	atom_concat(Sa, Bn, S).
+	number(N).
 evaluate(A, S, [X:N|T]):-
+	atom(A),
 	atom(X),
 	number(N),
 	evaluate(A, S, T).
-evaluate(E,S,[]):-
+evaluate(E,S,[X:N|T]):-
+	atom(X),
+	number(N),
+	atom_concat(A,B,E),
+	evaluate(A, As, [X:N|T]),
+	evaluate(B, Bs, [X:N|T]),
+	atom_concat(As, Bs, Ss),
+	S is Ss.
+evaluate(E,S,_):-
 	S is E,
 	number(S).
 

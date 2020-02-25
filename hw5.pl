@@ -168,34 +168,36 @@ d( U - V, x, RU - RV ):-d(U,x,RU), d(V,x,RV).
 d(U * V,x, U * DV + V * DU):- d(U,x,DU), d(V,x,DV).
 d(U ^ N, x, N*U ^ N1*DU) :- integer(N), N1 is N-1, d(U, x, DU).
 
-evaluate(A,A,B,[]):-
+evaluate(A,B,_):-
 	B is A,
 	number(B).
-evaluate(A,S,L):-evaluate(A,A,S,L).
-evaluate(A+B,F,S,[X:N|T]):-
+evaluate(A X B, An N Bn,[X:N|T]):-
 	atom(X),
 	number(N),
-	evaluate(B,F,S,[X:N|T]).
-evaluate(A,F,S,[X:N|T]):-evaluate(F,F,S,T).
+	evaluate(A, An, [X:N|T]),
+	evaluate(B, Bn, [X:N|T]).
+evaluate(A, S, [X:N|T]):-
+	evaluate(A, S, T).
+
 
 /* Problem 4 Tests:  */
-% :- evaluate(x*y, 6, [x:2, y:3]).
-% :- evaluate(x^3, 8, [x:2]).
-% :- evaluate(2*8, 16, []).
-% :- evaluate(2*y, 16, [y:8]).
+:- evaluate(x*y, 6, [x:2, y:3]).
+:- evaluate(x^3, 8, [x:2]).
+:- evaluate(2*8, 16, []).
+:- evaluate(2*y, 16, [y:8]).
 
-% :- evaluate(x*y, 8, [x:2, y:3]) -> fail ; true.
-% :- evaluate(2*8, 0, []) -> fail ; true.
+:- evaluate(x*y, 8, [x:2, y:3]) -> fail ; true.
+:- evaluate(2*8, 0, []) -> fail ; true.
 
-% :- d(3*(x +2*x*x),x,Result), VarValue = [x:2,y:5], evaluate(Result,Value,VarValue),
-%     Result = 3* (1+ (2*x*1+x*2))+ (x+2*x*x)*0,
-%     VarValue = [x:2, y:5],
-%     Value = 27.
+:- d(3*(x +2*x*x),x,Result), VarValue = [x:2,y:5], evaluate(Result,Value,VarValue),
+    Result = 3* (1+ (2*x*1+x*2))+ (x+2*x*x)*0,
+    VarValue = [x:2, y:5],
+    Value = 27.
 
-% :- d((3*x) ^ 4,x,Result), VarValue = [x:2,y:5] , evaluate(Result,Value,VarValue),
-%     Result = 4* (3*x)^3*3,
-%     VarValue = [x:2, y:5],
-%     Value = 2592.
+:- d((3*x) ^ 4,x,Result), VarValue = [x:2,y:5] , evaluate(Result,Value,VarValue),
+    Result = 4* (3*x)^3*3,
+    VarValue = [x:2, y:5],
+    Value = 2592.
 
 
 /* Problem 5:

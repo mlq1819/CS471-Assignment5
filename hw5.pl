@@ -178,29 +178,21 @@ evaluate(A, S, [X:N|T]):-
 	atom(X),
 	number(N),
 	evaluate(A, S, T).
-evaluate(A^B,S,[X:N|T]):-
-	atom(X),
-	number(N),
-	evaluate(A, Sa, [X:N|T]),
-	evaluate(B, Sb, [X:N|T]),
+evaluate(A^B,S,L):-
+	evaluate(A, Sa, L),
+	evaluate(B, Sb, L),
 	S is Sa^Sb.
-evaluate(A*B,S,[X:N|T]):-
-	atom(X),
-	number(N),
-	evaluate(A, Sa, [X:N|T]),
-	evaluate(B, Sb, [X:N|T]),
+evaluate(A*B,S,L):-
+	evaluate(A, Sa, L),
+	evaluate(B, Sb, L),
 	S is Sa*Sb.
-evaluate(A+B,S,[X:N|T]):-
-	atom(X),
-	number(N),
-	evaluate(A, Sa, [X:N|T]),
-	evaluate(B, Sb, [X:N|T]),
+evaluate(A+B,S,L):-
+	evaluate(A, Sa, L),
+	evaluate(B, Sb, L),
 	S is Sa+Sb.
-evaluate(A-B,S,[X:N|T]):-
-	atom(X),
-	number(N),
-	evaluate(A, Sa, [X:N|T]),
-	evaluate(B, Sb, [X:N|T]),
+evaluate(A-B,S,L):-
+	evaluate(A, Sa, L),
+	evaluate(B, Sb, L),
 	S is Sa-Sb.
 
 /* Problem 4 Tests:  */

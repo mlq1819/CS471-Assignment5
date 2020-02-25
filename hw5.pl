@@ -179,7 +179,7 @@ evaluate(A, S, [X:N|T]):-
 evaluate((A),S,[X:N|T]):-
 	atom(X),
 	number(N),
-	evaluate(A,S,[X:|T]).
+	evaluate(A,S,[X:N|T]).
 evaluate(A^B,S,[X:N|T]):-
 	atom(X),
 	number(N),

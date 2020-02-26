@@ -402,14 +402,13 @@ change(Change, [(Name, 1)|T]):-
 	coin(Name, Q),
 	Change>=Q,
 	ChangeN is Change-Q,
-	Nn is N-1,
 	change(ChangeN, T).
 
 /* Problem 10 Tests: */
-%:- change(168,C), C = [ (dollar, 1), (half, 1), (dime, 1), (nickel, 1), (penny, 3)] .
-%:- change(75,C),  C = [ (half, 1), (quarter, 1)] .
+:- change(168,C), C = [ (dollar, 1), (half, 1), (dime, 1), (nickel, 1), (penny, 3)] .
+:- change(75,C),  C = [ (half, 1), (quarter, 1)] .
 
-%:- (change(75,C), C = [(half, 2)]) -> fail ; true.
+:- (change(75,C), C = [(half, 2)]) -> fail ; true.
 
 /* Problem 11
    Define a predicate filter(+Goal, +Lst, ?Result), such that Result contains all the elements of Lst 

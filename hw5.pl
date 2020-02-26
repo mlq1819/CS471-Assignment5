@@ -236,12 +236,14 @@ Write a predicate run(X,Y) that succeeds if Y is the result obtained from "runni
 
 /* Problem 5 Answer: */
 
-run(nn(N), N).
+run(nn(N), N):-number(N).
 run(nu(F, X), Y):-
+	functor(_,F,1),
 	run(X, Xy),
 	Yy =.. [F,Xy],
 	Y is Yy.
 run(nb(F,Lx,Rx), Y):-
+	functor(_,F,2),
 	run(Lx, Ly),
 	run(Rx, Ry),
 	Yy =.. [F,Ly,Ry].

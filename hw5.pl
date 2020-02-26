@@ -293,8 +293,7 @@ binaryAP(nb(F,Xl,Xr),BPlst):-
 
 /* Problem 7 Answer: */
 
-unNest([N],L):-
-	unNest(N,L).
+unNest([],[]).
 unNest(N,[N]):-
 	atom(N).
 unNest([Nh|Nt],L):-

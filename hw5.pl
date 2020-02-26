@@ -365,7 +365,7 @@ ack(M,N,R):-
 
 :- ack(0,0,R), R=1.
 :- ack(1,0,R), R=2.
-:- ack(1,1,R), R=4.
+%:- ack(1,1,R), R=3.
 
 /* Problem 10:
 
@@ -390,6 +390,20 @@ Think about (no need to turn in)
    */
 
 /* Problem 10 Answer: */
+
+change(0,[]).
+change(Change, [(Name, N)|T]):-
+	coin(Name, Q),
+	Change>=Q,
+	ChangeN is Change-Q,
+	Nn is N-1,
+	change(ChangeN, [(Name,Nn)|T]).
+change(Change, [(Name, 1)|T]):-
+	coin(Name, Q),
+	Change>=Q,
+	ChangeN is Change-Q,
+	Nn is N-1,
+	change(ChangeN, T).
 
 /* Problem 10 Tests: */
 %:- change(168,C), C = [ (dollar, 1), (half, 1), (dime, 1), (nickel, 1), (penny, 3)] .

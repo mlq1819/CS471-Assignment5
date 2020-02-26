@@ -239,11 +239,13 @@ Write a predicate run(X,Y) that succeeds if Y is the result obtained from "runni
 run(nn(N), N).
 run(nu(F, X), Y):-
 	run(X, Xy),
-	Y =.. [F,Xy].
+	Yy =.. [F,Xy],
+	Y is Yy.
 run(nb(F,Lx,Rx), Y):-
 	run(Lx, Ly),
 	run(Rx, Ry),
-	Y =.. [F,Ly,Ry].
+	Yy =.. [F,Ly,Ry].
+	Y is Yy.
 
 /* Problem 5 Tests: */
 :- run(nb(+,nb(*,nn(2),nn(3)),nu(random,nn(5))),_).

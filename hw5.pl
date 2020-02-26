@@ -293,6 +293,14 @@ binaryAP(nb(F,Xl,Xr),BPlst):-
 
 /* Problem 7 Answer: */
 
+unNest([],[]).
+unNest([[Nhh|Nht]|Nt],L):-
+	unNest([Nhh|Nht],Lh),
+	unNest(Nt,Lt),
+	append(Lh,Lt,L).
+unNest([Nh|Nt],[Nh|Lt]):-
+	unNest(Nt,Lt).
+
 /* Problem 7 Tests: */
 
 % :- unNest([[r,s,[x,y]],[a],[],[s,t]],One), One = [r, s, x, y, a, s, t].

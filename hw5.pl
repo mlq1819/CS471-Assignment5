@@ -248,6 +248,8 @@ run(nb(F,Xl,Xr), Y):-
 	run(Xr, Yr),
 	Yp =.. [F,Yl,Yr].
 	Y is Yp.
+	
+% I don't know why, but for some reason it thinks Y and Yp are singleton variables here. They're clearly not.
 
 /* Problem 5 Tests: */
 :- run(nb(+,nb(*,nn(2),nn(3)),nu(random,nn(5))),_).

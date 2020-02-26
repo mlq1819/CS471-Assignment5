@@ -303,9 +303,9 @@ unNest([Nh|Nt],[Nh|Lt]):-
 
 /* Problem 7 Tests: */
 
-% :- unNest([[r,s,[x,y]],[a],[],[s,t]],One), One = [r, s, x, y, a, s, t].
-% :- unNest([[[r]],[]],[r]).
-% :- unNest([[r,s,[x,y]],[a],[],[s,t]],One), One = [r, s, x, y, a, t] -> fail ; true. 
+:- unNest([[r,s,[x,y]],[a],[],[s,t]],One), One = [r, s, x, y, a, s, t].
+:- unNest([[[r]],[]],[r]).
+:- unNest([[r,s,[x,y]],[a],[],[s,t]],One), One = [r, s, x, y, a, t] -> fail ; true. 
 
 
 /* Problem 8:

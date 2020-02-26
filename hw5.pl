@@ -293,13 +293,12 @@ binaryAP(nb(F,Xl,Xr),BPlst):-
 
 /* Problem 7 Answer: */
 
-unNest([[Nhh|Nht]|Nt],[Lh|Lt]):-
-	unNest(Nhh,Lh),
-	append(Nht,Nt,Nn),
-	unNest(Nn,Lt).
-unNest([Nh|Nt],[Nh|Lt]):-
-	unNest(Nt,Lt).
-unNest(N,N).
+unNest(N,[N]):-
+	atom(N).
+unNest([Nh|Nt],L):-
+	unNest(Nh,Lh),
+	unNest(Nt,Lt),
+	append(Lh,Lt,L).
 
 /* Problem 7 Tests: */
 

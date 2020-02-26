@@ -426,6 +426,8 @@ filter(Goal, [Lh|Lt], [Lh|Rt]):-
 	Run =.. [Goal,Lh],
 	Run.
 filter(Goal, [Lh|Lt], R):-
+	(Run =.. [Goal,Lh],
+	Run)-> fail; true,
 	filter(Goal, Lt, R).
 
 /* Problem 11 Tests: */

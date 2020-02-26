@@ -248,8 +248,6 @@ run(nb(F,Xl,Xr), Y):-
 	run(Xr, Yr),
 	Yp =.. [F,Yl,Yr],
 	Y is Yp.
-	
-% I don't know why, but for some reason it thinks Y and Yp are singleton variables here. They're clearly not.
 
 /* Problem 5 Tests: */
 :- run(nb(+,nb(*,nn(2),nn(3)),nu(random,nn(5))),_).
@@ -266,14 +264,22 @@ Using the AST described in problem 5, write a predicate binaryAP/2.  binaryAP(AS
 
 /* Problem 6 Answer: */
 
-
+binaryAP(nn(_), []).
+binaryAP(nu(F,X), B):-
+	functor(_,F,1),
+	binaryAP(X,B).
+binaryAP(nb(F,Xl,Xr),BPlst):-
+	functor(_,F,2),
+	binaryAP(Xl, Bl),
+	binaryAP(Xr, Br),
+	append(Bl,[F|Br],BPlst).
 
 /* Problem 6 Tests: */
-%:- T = nb(+,nb(*,nn(2),nn(3)),nu(random,nn(5))), binaryAP(T,L), L = [*, +].
-%:- T = nb(+, nb(*, nn(2), nn(3)), nb(-,nn(3), nn(5))),  binaryAP(T,L), L = [*, +, -].
-%:- T = nb(+, nb(*, nn(2),  nb(-,nn(3), nb(//, nn(2), nn(5)))),nn(9)) ,  binaryAP(T,L), L = [*, -, //, +].
+:- T = nb(+,nb(*,nn(2),nn(3)),nu(random,nn(5))), binaryAP(T,L), L = [*, +].
+:- T = nb(+, nb(*, nn(2), nn(3)), nb(-,nn(3), nn(5))),  binaryAP(T,L), L = [*, +, -].
+:- T = nb(+, nb(*, nn(2),  nb(-,nn(3), nb(//, nn(2), nn(5)))),nn(9)) ,  binaryAP(T,L), L = [*, -, //, +].
 
-%:- (T = nb(+,nb(*,nn(2),nn(3)),nu(random,nn(5))), binaryAP(T,L), L = [+,*]) -> fail ; true.
+:- (T = nb(+,nb(*,nn(2),nn(3)),nu(random,nn(5))), binaryAP(T,L), L = [+,*]) -> fail ; true.
 
 
 

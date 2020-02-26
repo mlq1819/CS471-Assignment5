@@ -318,10 +318,10 @@ Write a predicate, append3DL(A,B,C,D) that succeeds if D is the difference lists
 /* Problem 8 Answer: */
 
 append3DL(X-B, Y-C, Z-D, S-D):-
-	append(X,Z,S),
-	append(C,D,Z),
+	append(_,B,X),
 	append(B,C,Y),
-	append(_,B,X).
+	append(C,D,Z),
+	append(X,Z,S).
 
 /* Problem 8 Tests: */
 :- append3DL([1,2|A]-A,[3,4|B]-B,[5,6|[]]-[],L), L = [1,2,3,4,5,6]-[].

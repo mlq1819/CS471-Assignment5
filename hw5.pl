@@ -236,14 +236,23 @@ Write a predicate run(X,Y) that succeeds if Y is the result obtained from "runni
 
 /* Problem 5 Answer: */
 
-/* Problem 5 Tests: */
-%:- run(nb(+,nb(*,nn(2),nn(3)),nu(random,nn(5))),_).
-%:- run(nb(+,nb(*,nn(2),nn(3)),nn(3)),E), E=9.
-%:- run(nb(+,nb(*,nn(2),nn(3)),nb(-,nn(6),nn(3))),E), E=9.
-%:- run(nn(2),E), E=2.
-%:- run(nu(abs,nn(-2)),E), E=2.
+run(nn(N), N).
+run(nu(F, X), Y):-
+	run(X, Xy),
+	Y =.. [F,Xy].
+run(nb(F,Lx,Rx), Y):-
+	run(Lx, Ly),
+	run(Rx, Ry),
+	Y =.. [F,Ly,Ry].
 
-%:- (run(nb(+,nb(*,nn(2),nn(3)),nb(-,nn(6),nn(3))),E), E=8) -> fail ; true.
+/* Problem 5 Tests: */
+:- run(nb(+,nb(*,nn(2),nn(3)),nu(random,nn(5))),_).
+:- run(nb(+,nb(*,nn(2),nn(3)),nn(3)),E), E=9.
+:- run(nb(+,nb(*,nn(2),nn(3)),nb(-,nn(6),nn(3))),E), E=9.
+:- run(nn(2),E), E=2.
+:- run(nu(abs,nn(-2)),E), E=2.
+
+:- (run(nb(+,nb(*,nn(2),nn(3)),nb(-,nn(6),nn(3))),E), E=8) -> fail ; true.
 
 
 /* Problem 6:

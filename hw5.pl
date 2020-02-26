@@ -337,20 +337,35 @@ append3DL(X-B, Y-C, Z-D, S-D):-
 	ack( m,n ) =	ack(m - 1, 1)                  if n = 0 and m > 0 
 	ack( m,n ) =	ack( m-1, ack( m, n-1 ) )      if n >0 and m > 0
 
-   Convert this definition to a Prolog predicate ack/3, ack(M,N,R) where R should unify with the
+   Convert this definition to a Prolog predicate ack/ 3, ack(M,N,R) where R should unify with the
    result of ack(M,N) as indicated by the above definition.
    In addition provide 3 test cases.  In at least one test case, m should have a value greater than 0.
 */
 
-/* Problem 9 Answer */
+/* 
+Problem 9 Answer 
+*/
 
-
+ack(0,N,R):-R is N+1.
+ack(M,0,R):-
+	M>0,
+	Mn is M-1,
+	ack(Mn,1,R).
+ack(M,N,R):-
+	M>0,
+	N>0,
+	Mn is m-1,
+	Nn is n-1,
+	ack(M,Nn,Rn),
+	ack(Mn,Rn,R).
 
 /* Problem 9 Test */
 
 % You're own your own for this one :)
 
-
+:- ack(0,0,R), R=1.
+:- ack(1,0,R), R=2.
+:- ack(1,1,R), R=4.
 
 /* Problem 10:
 

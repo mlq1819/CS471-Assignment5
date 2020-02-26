@@ -354,8 +354,8 @@ ack(M,0,R):-
 ack(M,N,R):-
 	M>0,
 	N>0,
-	Mn is m-1,
-	Nn is n-1,
+	Mn is M-1,
+	Nn is N-1,
 	ack(M,Nn,Rn),
 	ack(Mn,Rn,R).
 

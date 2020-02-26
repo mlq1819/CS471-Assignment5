@@ -424,10 +424,9 @@ even(X) :- 0 is X mod 2.
 filter(_,[],[]).
 filter(Goal, [Lh|Lt], [Lh|Rt]):-
 	Run =.. [Goal,Lh],
-	Run.
+	Run,
+	filter(Goal, Lt, Rt).
 filter(Goal, [Lh|Lt], R):-
-	(Run =.. [Goal,Lh],
-	Run)-> fail; true,
 	filter(Goal, Lt, R).
 
 /* Problem 11 Tests: */

@@ -246,7 +246,7 @@ run(nb(F,Xl,Xr), Y):-
 	functor(_,F,2),
 	run(Xl, Yl),
 	run(Xr, Yr),
-	Yp =.. [F,Yl,Yr].
+	Yp =.. [F,Yl,Yr],
 	Y is Yp.
 	
 % I don't know why, but for some reason it thinks Y and Yp are singleton variables here. They're clearly not.
@@ -265,6 +265,8 @@ run(nb(F,Xl,Xr), Y):-
 Using the AST described in problem 5, write a predicate binaryAP/2.  binaryAP(AST, BPlst) succeeds if all the binary arithmetic predicates that occur in AST are collected into BPlst.  Use an in order traversal of AST.  */
 
 /* Problem 6 Answer: */
+
+
 
 /* Problem 6 Tests: */
 %:- T = nb(+,nb(*,nn(2),nn(3)),nu(random,nn(5))), binaryAP(T,L), L = [*, +].

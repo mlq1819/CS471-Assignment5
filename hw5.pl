@@ -317,7 +317,7 @@ Write a predicate, append3DL(A,B,C,D) that succeeds if D is the difference lists
 
 /* Problem 8 Answer: */
 
-append3DL([A|X]-X,[B|Y]-Y,[C|Z]-Z,D):-
+append3DL([A|[W|Z]]-[W|Z],[B|[X|Z]]-[X|Z],[C|[Y|Z]]-[Y|Z],[D|Z]-Z):-
 	append(A,B,Dh),
 	append(Dh,C,D).
 

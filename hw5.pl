@@ -421,8 +421,15 @@ even(X) :- 0 is X mod 2.
 
 /* Problem 11 Answer: */
 
+filter(_,[],[]).
+filter(Goal, [Lh|Lt], [Lh|Rt]):-
+	Run =.. [Goal,Lh],
+	Run.
+filter(Goal, [Lh|Lt], R):-
+	filter(Goal, Lt, R).
+
 /* Problem 11 Tests: */
 
-%:- filter(even, [1, 2, 3, 4], X), X=[2,4].
-%:- (filter(even, [1, 2, 3, 4], [2,4,6]))-> fail ; true.
-%:- (filter(even, [1, 2, 3, 4], X), X=[1,3])-> fail ; true.
+:- filter(even, [1, 2, 3, 4], X), X=[2,4].
+:- (filter(even, [1, 2, 3, 4], [2,4,6]))-> fail ; true.
+:- (filter(even, [1, 2, 3, 4], X), X=[1,3])-> fail ; true.
